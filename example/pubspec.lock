@@ -43,13 +43,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.15.0"
-  cupertino_icons:
+  extended_listview:
     dependency: "direct main"
     description:
-      name: cupertino_icons
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.4"
+      path: ".."
+      relative: true
+    source: path
+    version: "0.0.1"
   fake_async:
     dependency: transitive
     description:
@@ -165,3 +165,4 @@ packages:
     version: "2.1.1"
 sdks:
   dart: ">=2.15.0 <3.0.0"
+  flutter: ">=1.17.0"
