@@ -1,15 +1,15 @@
 import 'package:extended_listview/extended_listview.dart';
 import 'package:flutter/material.dart';
 
-class ExampleAppContent extends StatefulWidget {
-  const ExampleAppContent({Key? key}) : super(key: key);
+class ExampleListView extends StatefulWidget {
+  const ExampleListView({Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _ExampleAppContentState();
+  State<StatefulWidget> createState() => _ExampleListViewState();
 }
 
-class _ExampleAppContentState extends State<ExampleAppContent> {
-  static const itemCount = 100;
+class _ExampleListViewState extends State<ExampleListView> {
+  static const itemCount = 50;
   final scrollPosController = ScrollPosController(itemCount: itemCount);
   int selected = 0;
   bool center = false;

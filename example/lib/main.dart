@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Extended ListView'),
         ),
-        body: const ExampleAppContent(),
+        body: const ExampleListView(),
       ),
     );
   }
