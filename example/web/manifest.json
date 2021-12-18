@@ -1,0 +1,35 @@
+{
+    "name": "ScrollPosController",
+    "short_name": "scroll_pos",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#fb8c00",
+    "theme_color": "#ff9800",
+    "description": "A controller that allow you to place item at specific position on the screen.",
+    "orientation": "portrait-primary",
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "icons/Icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-maskable-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "icons/Icon-maskable-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ]
+}
