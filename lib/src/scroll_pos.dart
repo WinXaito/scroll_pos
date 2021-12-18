@@ -28,15 +28,21 @@ class ScrollPosController extends ScrollController {
           debugLabel: debugLabel,
         );
 
+  @visibleForTesting
+  double get inside => position.extentInside;
+
+  @visibleForTesting
+  double get max => position.maxScrollExtent;
+
   /// total returns the total of the inside part and the scrollable part.
-  double get total => position.extentInside + position.maxScrollExtent;
+  double get total => inside + max;
 
   /// scrollPerItem returns the quantity of scroll needed for travel
   /// the height of one item.
   double get scrollPerItem => total / itemCount;
 
   /// visibleItems returns the quantity of items visible in the screen.
-  double get visibleItems => position.extentInside / scrollPerItem;
+  double get visibleItems => inside / scrollPerItem;
 
   /// scrollTop will move the scrollbar to the top (first item).
   void scrollTop({bool? animate}) {
@@ -45,7 +51,7 @@ class ScrollPosController extends ScrollController {
 
   /// scrollBottom will move the scrollbar to the bottom (last item).
   void scrollBottom({bool? animate}) {
-    _scrollToPos(position.maxScrollExtent, animate: animate);
+    _scrollToPos(max, animate: animate);
   }
 
   /// scrollToItem will move the scrollbar to make the item
@@ -59,13 +65,13 @@ class ScrollPosController extends ScrollController {
   /// scrollOffItemCenter return the offset when the item is placed at
   /// the center of the screen.
   double scrollOffItemCenter(int index) {
-    return (index + 1) * scrollPerItem - position.extentInside / 2;
+    return (index + 1) * scrollPerItem - inside / 2;
   }
 
   /// scrollOfItemBottom return the offset when the item is placed at
   /// the bottom of the screen.
   double scrollOffItemBottom(int index) {
-    return (index + 1) * scrollPerItem - position.extentInside;
+    return (index + 1) * scrollPerItem - inside;
   }
 
   /// scrollOffItemTop return the offset when the item is placed at
@@ -78,12 +84,12 @@ class ScrollPosController extends ScrollController {
     if (this.animate ||
         (animate ?? false) && animationDuration != Duration.zero) {
       animateTo(
-        offset.clamp(0, position.maxScrollExtent),
+        offset.clamp(0, max),
         duration: animationDuration,
         curve: animationCurve,
       );
     } else {
-      jumpTo(offset.clamp(0, position.maxScrollExtent));
+      jumpTo(offset.clamp(0, max));
     }
   }
 

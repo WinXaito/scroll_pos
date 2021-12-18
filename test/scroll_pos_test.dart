@@ -1,6 +1,6 @@
-import 'package:extended_listview/scroll_pos.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:scroll_pos/scroll_pos.dart';
 
 class FakeScrollPosController extends ScrollPosController {
   double _offset = 0;
