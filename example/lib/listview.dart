@@ -1,4 +1,4 @@
-import 'package:extended_listview/scroll_pos.dart';
+import 'package:scroll_pos/scroll_pos.dart';
 import 'package:flutter/material.dart';
 
 class ExampleListView extends StatefulWidget {
