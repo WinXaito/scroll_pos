@@ -3,28 +3,29 @@ import 'package:flutter/widgets.dart';
 const _kDefaultAnimationDuration = Duration(milliseconds: 300);
 const _kDefaultAnimationCurve = Curves.ease;
 
-class ScrollPosController {
-  late final ScrollController scrollController;
+class ScrollPosController extends ScrollController {
   int itemCount;
   bool animate;
   Duration animationDuration;
   Curve animationCurve;
 
   ScrollPosController({
-    ScrollController? scrollController,
     this.itemCount = 0,
     this.animate = true,
     this.animationDuration = _kDefaultAnimationDuration,
     this.animationCurve = _kDefaultAnimationCurve,
-  }) {
-    this.scrollController = scrollController ?? ScrollController();
-  }
+    double initialScrollOffset = 0.0,
+    bool keepScrollOffset = true,
+    String? debugLabel,
+  }) : super(
+          initialScrollOffset: initialScrollOffset,
+          keepScrollOffset: keepScrollOffset,
+          debugLabel: debugLabel,
+        );
 
-  double get offset => scrollController.offset;
+  double get inside => position.extentInside;
 
-  double get inside => scrollController.position.extentInside;
-
-  double get max => scrollController.position.maxScrollExtent;
+  double get max => position.maxScrollExtent;
 
   double get total => inside + max;
 
@@ -37,7 +38,7 @@ class ScrollPosController {
   }
 
   void scrollBottom({bool? animate}) {
-    _scrollToPos(scrollController.position.maxScrollExtent, animate: animate);
+    _scrollToPos(max, animate: animate);
   }
 
   void scrollToItem(int index, {bool? animate, bool center = false}) {
@@ -48,19 +49,19 @@ class ScrollPosController {
     if (offset < 0) {
       offset = 0;
     }
-    if (offset > scrollController.position.maxScrollExtent) {
-      offset = scrollController.position.maxScrollExtent;
+    if (offset > max) {
+      offset = max;
     }
 
     if (this.animate ||
         (animate ?? false) && animationDuration != Duration.zero) {
-      scrollController.animateTo(
+      animateTo(
         offset,
         duration: animationDuration,
         curve: animationCurve,
       );
     } else {
-      scrollController.jumpTo(offset);
+      jumpTo(offset);
     }
   }
 

@@ -10,7 +10,7 @@ class ExampleListView extends StatefulWidget {
 
 class _ExampleListViewState extends State<ExampleListView> {
   static const itemCount = 50;
-  final scrollPosController = ScrollPosController(itemCount: itemCount);
+  final controller = ScrollPosController(itemCount: itemCount);
   int selected = 0;
   bool center = false;
 
@@ -20,8 +20,8 @@ class _ExampleListViewState extends State<ExampleListView> {
       children: [
         _controls(context),
         Expanded(
-          child: ExtendedListView.builder(
-            scrollPosController: scrollPosController,
+          child: ListView.builder(
+            controller: controller,
             itemCount: itemCount,
             itemBuilder: (context, index) {
               return ListTile(
@@ -46,32 +46,32 @@ class _ExampleListViewState extends State<ExampleListView> {
           children: [
             _bt('Top', () {
               selected = 0;
-              scrollPosController.scrollTop();
+              controller.scrollTop();
             }),
             _bt('Bottom', () {
               selected = itemCount - 1;
-              scrollPosController.scrollBottom();
+              controller.scrollBottom();
             }),
             _bt('Previous', () {
               if (selected > 0) {
                 selected--;
               }
-              scrollPosController.scrollToItem(selected, center: center);
+              controller.scrollToItem(selected, center: center);
             }),
             _bt('Next', () {
               if (selected < itemCount - 1) {
                 selected++;
               }
-              scrollPosController.scrollToItem(selected, center: center);
+              controller.scrollToItem(selected, center: center);
             }),
             Row(
               children: [
                 const Text('Animation:'),
                 Switch(
-                  value: scrollPosController.animate,
+                  value: controller.animate,
                   onChanged: (v) {
                     setState(() {
-                      scrollPosController.animate = v;
+                      controller.animate = v;
                     });
                   },
                 ),
