@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'ExtendedListView demo',
+      title: 'ScrollPosController demo',
       theme: ThemeData(
         primarySwatch: Colors.orange,
         listTileTheme: ListTileThemeData(
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Extended ListView'),
+          title: const Text('ScrollPosController Demo'),
         ),
         body: const ExampleListView(),
       ),
