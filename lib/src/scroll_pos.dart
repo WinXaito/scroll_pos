@@ -62,6 +62,36 @@ class ScrollPosController extends ScrollController {
     _scrollOffItem(index, animate: animate, center: center);
   }
 
+  /// backward will move the scrollbar with a distance of one item in
+  /// the bottom direction.
+  /// If value of align is `true`, the last visible item will be aligned.
+  void forward({bool align = true, bool? animate}) {
+    if (align) {
+      final lastIdx = ((offset + inside) / scrollPerItem - 1).floor() + 1;
+      if (lastIdx >= itemCount) {
+        return;
+      }
+      scrollToItem(lastIdx, animate: animate);
+    } else {
+      _scrollToPos(offset + scrollPerItem, animate: animate);
+    }
+  }
+
+  /// backward will move the scrollbar with a distance of one item in
+  /// the top direction.
+  /// If value of align is `true`, the first visible item will be aligned.
+  void backward({bool align = true, bool? animate}) {
+    if (align) {
+      final firstIdx = (offset / scrollPerItem - 1).ceil();
+      if (firstIdx < 0) {
+        return;
+      }
+      scrollToItem(firstIdx, animate: animate);
+    } else {
+      _scrollToPos(offset - scrollPerItem, animate: animate);
+    }
+  }
+
   /// scrollOffItemCenter return the offset when the item is placed at
   /// the center of the screen.
   double scrollOffItemCenter(int index) {
