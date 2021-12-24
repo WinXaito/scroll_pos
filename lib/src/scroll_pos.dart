@@ -111,8 +111,8 @@ class ScrollPosController extends ScrollController {
   }
 
   void _scrollToPos(double offset, {bool? animate}) {
-    if (this.animate ||
-        (animate ?? false) && animationDuration != Duration.zero) {
+    if (((animate != null && animate) || (animate == null && this.animate)) &&
+        animationDuration != Duration.zero) {
       animateTo(
         offset.clamp(0, max),
         duration: animationDuration,
