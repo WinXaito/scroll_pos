@@ -111,4 +111,18 @@ void main() {
     expect(
         controller.offset, (idx + 1) * controller.scrollPerItem - inside / 2);
   });
+
+  test('ScrollForward', () {
+    controller.scrollTop();
+    controller.forward();
+    final expected = controller.scrollPerItem;
+    expect(controller.offset, expected);
+  });
+
+  test('ScrollBackward', () {
+    controller.scrollBottom();
+    controller.scrollToItem(1);
+    controller.backward();
+    expect(controller.offset, 0);
+  });
 }
