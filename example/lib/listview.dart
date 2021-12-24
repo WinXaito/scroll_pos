@@ -39,7 +39,7 @@ class _ExampleListViewState extends State<ExampleListView> {
   Widget _controls(BuildContext context) {
     Widget child;
     final items = _controlItems(context);
-    if (MediaQuery.of(context).size.width > 500) {
+    if (MediaQuery.of(context).size.width > 700) {
       child = Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: items,
@@ -89,6 +89,12 @@ class _ExampleListViewState extends State<ExampleListView> {
           selected++;
         }
         controller.scrollToItem(selected, center: center);
+      }),
+      _bt('Forward', () {
+        controller.forward();
+      }),
+      _bt('Backward', () {
+        controller.backward();
       }),
       Row(
         children: [
