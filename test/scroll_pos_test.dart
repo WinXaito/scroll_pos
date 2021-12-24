@@ -58,54 +58,54 @@ void main() {
   });
 
   test('ScrollBottom', () {
-    controller.scrollBottom();
+    controller.scrollToEnd();
     expect(controller.max != 0, true);
     expect(controller.offset, controller.max);
   });
 
   test('ScrollTop', () {
-    controller.scrollTop();
+    controller.scrollToStart();
     expect(controller.offset, 0);
   });
 
   test('ScrollToItem-FromBottom-top', () {
-    controller.scrollBottom();
+    controller.scrollToEnd();
     controller.scrollToItem(0);
     expect(controller.offset, 0);
   });
 
   test('ScrollToItem-FromTop-bottom', () {
-    controller.scrollTop();
+    controller.scrollToStart();
     controller.scrollToItem(itemCount - 1);
     expect(controller.offset, max);
   });
 
   test('ScrollToItem-FromTop-middle', () {
-    controller.scrollTop();
+    controller.scrollToStart();
     controller.scrollToItem(itemCount - 2);
     expect(controller.offset, max - controller.scrollPerItem);
   });
 
   test('ScrollToItem-FromBottom-middle', () {
-    controller.scrollBottom();
+    controller.scrollToEnd();
     controller.scrollToItem(1);
     expect(controller.offset, controller.scrollPerItem);
   });
 
   test('ScrollToItem-top', () {
-    controller.scrollTop();
+    controller.scrollToStart();
     controller.scrollToItem(0, center: true);
     expect(controller.offset, 0);
   });
 
   test('ScrollToItem-bottom', () {
-    controller.scrollTop();
+    controller.scrollToStart();
     controller.scrollToItem(itemCount - 1, center: true);
     expect(controller.offset, max);
   });
 
   test('ScrollToItem-center', () {
-    controller.scrollTop();
+    controller.scrollToStart();
     final idx = (itemCount / 2).floor();
     controller.scrollToItem(idx, center: true);
     expect(
@@ -113,14 +113,14 @@ void main() {
   });
 
   test('ScrollForward', () {
-    controller.scrollTop();
+    controller.scrollToStart();
     controller.forward();
     final expected = controller.scrollPerItem;
     expect(controller.offset, expected);
   });
 
   test('ScrollBackward', () {
-    controller.scrollBottom();
+    controller.scrollToEnd();
     controller.scrollToItem(1);
     controller.backward();
     expect(controller.offset, 0);

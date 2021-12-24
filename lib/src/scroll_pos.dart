@@ -54,12 +54,12 @@ class ScrollPosController extends ScrollController {
   bool get canBackward => positions.isNotEmpty ? offset == 0 : false;
 
   /// scrollTop will move the scrollbar to the top (first item).
-  void scrollTop({bool? animate}) {
+  void scrollToStart({bool? animate}) {
     _scrollToPos(0, animate: animate);
   }
 
   /// scrollBottom will move the scrollbar to the bottom (last item).
-  void scrollBottom({bool? animate}) {
+  void scrollToEnd({bool? animate}) {
     _scrollToPos(max, animate: animate);
   }
 
@@ -109,13 +109,13 @@ class ScrollPosController extends ScrollController {
 
   /// scrollOfItemBottom return the offset when the item is placed at
   /// the bottom of the screen.
-  double scrollOffItemBottom(int index) {
+  double scrollOffItemEnd(int index) {
     return (index + 1) * scrollPerItem - inside;
   }
 
   /// scrollOffItemTop return the offset when the item is placed at
   /// the top of the screen.
-  double scrollOffItemTop(int index) {
+  double scrollOffItemStart(int index) {
     return index * scrollPerItem;
   }
 
@@ -134,15 +134,15 @@ class ScrollPosController extends ScrollController {
 
   void _scrollOffItem(int index, {bool? animate, bool center = false}) {
     final centerVal = scrollOffItemCenter(index);
-    final bottomVal = scrollOffItemBottom(index);
-    final topVal = scrollOffItemTop(index);
+    final endVal = scrollOffItemEnd(index);
+    final startVal = scrollOffItemStart(index);
 
     if (center) {
       _scrollToPos(centerVal, animate: animate);
-    } else if (offset < bottomVal) {
-      _scrollToPos(bottomVal, animate: animate);
-    } else if (offset > topVal) {
-      _scrollToPos(topVal, animate: animate);
+    } else if (offset < endVal) {
+      _scrollToPos(endVal, animate: animate);
+    } else if (offset > startVal) {
+      _scrollToPos(startVal, animate: animate);
     }
   }
 }

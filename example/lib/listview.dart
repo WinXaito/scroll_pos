@@ -72,11 +72,11 @@ class _ExampleListViewState extends State<ExampleListView> {
     return [
       _bt('Top', () {
         selected = 0;
-        controller.scrollTop();
+        controller.scrollToStart();
       }),
       _bt('Bottom', () {
         selected = itemCount - 1;
-        controller.scrollBottom();
+        controller.scrollToEnd();
       }),
       _bt('Previous', () {
         if (selected > 0) {
