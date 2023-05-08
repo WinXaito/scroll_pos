@@ -29,29 +29,32 @@ class ScrollPosController extends ScrollController {
         );
 
   @visibleForTesting
-  double get inside => positions.isNotEmpty ? position.extentInside : 0;
+  double get inside => positions.isNotEmpty && position.hasContentDimensions ? position.extentInside : 0;
 
   @visibleForTesting
-  double get max => positions.isNotEmpty ? position.maxScrollExtent : 0;
+  double get max => positions.isNotEmpty && position.hasContentDimensions ? position.maxScrollExtent : 0;
 
   /// total returns the total of the inside part and the scrollable part.
   double get total => inside + max;
 
+  @override
+  double get offset => positions.isNotEmpty && position.hasPixels ? super.offset : 0;
+
   /// scrollPerItem returns the quantity of scroll needed for travel
   /// the height of one item.
-  double get scrollPerItem => total / itemCount;
+  double get scrollPerItem => itemCount > 0 ? total / itemCount : 0;
 
   /// visibleItems returns the quantity of items visible in the screen.
-  double get visibleItems => inside / scrollPerItem;
+  double get visibleItems => scrollPerItem > 0 ? inside / scrollPerItem : 0;
 
   /// canScroll indicate if this widget has scrollable content
   bool get canScroll => max > 0;
 
   /// canForward indicate if the scrollbar is at the end position.
-  bool get canForward => positions.isNotEmpty ? offset == max : false;
+  bool get canForward => positions.isNotEmpty && position.hasPixels ? offset == max : false;
 
   /// canBackward indicate if the scrollbar is at the start position.
-  bool get canBackward => positions.isNotEmpty ? offset == 0 : false;
+  bool get canBackward => positions.isNotEmpty && position.hasPixels ? offset == 0 : false;
 
   /// scrollTop will move the scrollbar to the top (first item).
   void scrollToStart({bool? animate}) {
