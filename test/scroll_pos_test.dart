@@ -43,10 +43,21 @@ void main() {
   const itemCount = 15;
 
   final controller = FakeScrollPosController(max, inside, itemCount);
+  final emptyController = FakeScrollPosController(0, 0, 0);
 
   test('Default values', () {
     expect(controller.animate, true);
     expect(controller.itemCount, itemCount);
+  });
+
+  test('Empty list', () {
+    expect(emptyController.animate, true);
+    expect(emptyController.itemCount, 0);
+    expect(emptyController.scrollPerItem, 0);
+    expect(emptyController.max, 0);
+    expect(emptyController.offset, 0);
+    emptyController.scrollToEnd();
+    expect(emptyController.offset, 0);
   });
 
   test('Scroll per item', () {
