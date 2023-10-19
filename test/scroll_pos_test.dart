@@ -170,4 +170,50 @@ void main() {
     controller.forward();
     expect(controller.canBackward, true);
   });
+
+  test('Page forward aligned', () {
+    controller.scrollToStart();
+    expect(controller.offset, 0);
+    controller.forwardPage();
+    expect(controller.offset, controller.visibleItems.floor() * controller.scrollPerItem);
+  });
+
+  test('Page backward aligned', () {
+    controller.scrollToEnd();
+    expect(controller.offset, max);
+    controller.backwardPage();
+    expect(controller.offset, max - controller.visibleItems.floor() * controller.scrollPerItem);
+  });
+
+  test('Page forward not aligned', () {
+    controller.scrollToStart();
+    expect(controller.offset, 0);
+    controller.forwardPage(align: false);
+    controller.forwardPage(align: false);
+    expect(controller.offset, controller.inside * 2);
+  });
+
+  test('Page backward not aligned', () {
+    controller.scrollToEnd();
+    expect(controller.offset, max);
+    controller.backwardPage(align: false);
+    controller.backwardPage(align: false);
+    expect(controller.offset, max - controller.inside * 2);
+  });
+
+  test('Page forward/backward start', () {
+    controller.scrollToStart();
+    expect(controller.offset, 0);
+    controller.forwardPage();
+    controller.backwardPage();
+    expect(controller.offset, 0);
+  });
+
+  test('page forward/backward start', () {
+    controller.scrollToEnd();
+    expect(controller.offset, max);
+    controller.backwardPage();
+    controller.forwardPage();
+    expect(controller.offset, max);
+  });
 }

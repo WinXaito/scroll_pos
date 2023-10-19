@@ -115,6 +115,20 @@ class ScrollPosController extends ScrollController {
     }
   }
 
+  /// forwardPage will move the scrollbar with a distance of the inside view
+  /// in the bottom direction.
+  void forwardPage({bool align = true, bool? animate}) {
+    final o = align ? offset + (visibleItems.floor() * scrollPerItem) : offset + inside;
+    _scrollToPos(o, animate: animate);
+  }
+
+  /// backwardPage will move the scrollbar with a distance of the inside view
+  /// in the top direction.
+  void backwardPage({bool align = true, bool? animate}){
+    final o = align ? offset - (visibleItems.floor() * scrollPerItem) : offset - inside;
+    _scrollToPos(o, animate: animate);
+  }
+
   /// scrollOffItemCenter return the offset when the item is placed at
   /// the center of the screen.
   double scrollOffItemCenter(int index) {

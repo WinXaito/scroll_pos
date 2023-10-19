@@ -2,6 +2,7 @@
 
 - **BREAKING CHANGE**: Fix `canBackward` and `canForward` methods. These methods had a bad behaviour.
 - Add `atStart` and `atEnd` attribute to indicate if the scrollbar is at the top or the bottom.
+- Add `forwardPage` and `backwardPage` methods to move by the inside view distance (generally, this is the comportment of the page up/down).
 
 ## 0.4.0 - 08/05/2023
 

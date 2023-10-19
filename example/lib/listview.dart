@@ -105,12 +105,26 @@ class _ExampleListViewState extends State<ExampleListView> {
         }
         controller.scrollToItem(selected, center: center);
       }),
-      _bt('Forward', () {
-        controller.forward();
-      }, enabled: controller.canForward),
       _bt('Backward', () {
         controller.backward();
       }, enabled: controller.canBackward),
+      _bt('Forward', () {
+        controller.forward();
+      }, enabled: controller.canForward),
+      _bt('Page backward', () {
+        controller.backwardPage();
+        selected -= controller.visibleItems.floor();
+        if(selected < 0){
+          selected = 0;
+        }
+      }, enabled: controller.canBackward || selected != 0),
+      _bt('Page forward', () {
+        controller.forwardPage();
+        selected += controller.visibleItems.floor();
+        if(selected >= itemCount){
+          selected = itemCount - 1;
+        }
+      }, enabled: controller.canForward || selected != itemCount - 1),
       Row(
         children: [
           const Text('Animation:'),
