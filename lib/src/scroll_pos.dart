@@ -69,12 +69,12 @@ class ScrollPosController extends ScrollController {
 
   /// scrollTop will move the scrollbar to the top (first item).
   void scrollToStart({bool? animate}) {
-    _scrollToPos(0, animate: animate);
+    scrollToPos(0, animate: animate);
   }
 
   /// scrollBottom will move the scrollbar to the bottom (last item).
   void scrollToEnd({bool? animate}) {
-    _scrollToPos(max, animate: animate);
+    scrollToPos(max, animate: animate);
   }
 
   /// scrollToItem will move the scrollbar to make the item
@@ -96,7 +96,7 @@ class ScrollPosController extends ScrollController {
       }
       scrollToItem(lastIdx, animate: animate);
     } else {
-      _scrollToPos(offset + scrollPerItem, animate: animate);
+      scrollToPos(offset + scrollPerItem, animate: animate);
     }
   }
 
@@ -111,7 +111,7 @@ class ScrollPosController extends ScrollController {
       }
       scrollToItem(firstIdx, animate: animate);
     } else {
-      _scrollToPos(offset - scrollPerItem, animate: animate);
+      scrollToPos(offset - scrollPerItem, animate: animate);
     }
   }
 
@@ -119,14 +119,14 @@ class ScrollPosController extends ScrollController {
   /// in the bottom direction.
   void forwardPage({bool align = true, bool? animate}) {
     final o = align ? offset + (visibleItems.floor() * scrollPerItem) : offset + inside;
-    _scrollToPos(o, animate: animate);
+    scrollToPos(o, animate: animate);
   }
 
   /// backwardPage will move the scrollbar with a distance of the inside view
   /// in the top direction.
   void backwardPage({bool align = true, bool? animate}){
     final o = align ? offset - (visibleItems.floor() * scrollPerItem) : offset - inside;
-    _scrollToPos(o, animate: animate);
+    scrollToPos(o, animate: animate);
   }
 
   /// scrollOffItemCenter return the offset when the item is placed at
@@ -147,7 +147,7 @@ class ScrollPosController extends ScrollController {
     return index * scrollPerItem;
   }
 
-  void _scrollToPos(double offset, {bool? animate}) {
+  void scrollToPos(double offset, {bool? animate}) {
     if (((animate != null && animate) || (animate == null && this.animate)) &&
         animationDuration != Duration.zero) {
       animateTo(
@@ -166,11 +166,11 @@ class ScrollPosController extends ScrollController {
     final startVal = scrollOffItemStart(index);
 
     if (center) {
-      _scrollToPos(centerVal, animate: animate);
+      scrollToPos(centerVal, animate: animate);
     } else if (offset < endVal) {
-      _scrollToPos(endVal, animate: animate);
+      scrollToPos(endVal, animate: animate);
     } else if (offset > startVal) {
-      _scrollToPos(startVal, animate: animate);
+      scrollToPos(startVal, animate: animate);
     }
   }
 }
