@@ -29,16 +29,21 @@ class ScrollPosController extends ScrollController {
         );
 
   @visibleForTesting
-  double get inside => positions.isNotEmpty && position.hasContentDimensions ? position.extentInside : 0;
+  double get inside => positions.isNotEmpty && position.hasContentDimensions
+      ? position.extentInside
+      : 0;
 
   @visibleForTesting
-  double get max => positions.isNotEmpty && position.hasContentDimensions ? position.maxScrollExtent : 0;
+  double get max => positions.isNotEmpty && position.hasContentDimensions
+      ? position.maxScrollExtent
+      : 0;
 
   /// total returns the total of the inside part and the scrollable part.
   double get total => inside + max;
 
   @override
-  double get offset => positions.isNotEmpty && position.hasPixels ? super.offset : 0;
+  double get offset =>
+      positions.isNotEmpty && position.hasPixels ? super.offset : 0;
 
   /// scrollPerItem returns the quantity of scroll needed for travel
   /// the height of one item.
@@ -50,11 +55,17 @@ class ScrollPosController extends ScrollController {
   /// canScroll indicate if this widget has scrollable content
   bool get canScroll => max > 0;
 
-  /// canForward indicate if the scrollbar is at the end position.
-  bool get canForward => positions.isNotEmpty && position.hasPixels ? offset == max : false;
+  /// atStart indicate if the scroll is at the start position (offset 0)
+  bool get atStart => offset == 0.0;
 
-  /// canBackward indicate if the scrollbar is at the start position.
-  bool get canBackward => positions.isNotEmpty && position.hasPixels ? offset == 0 : false;
+  /// atEnd indicate if the scroll is at the end position (offset max)
+  bool get atEnd => offset == max;
+
+  /// canForward indicate if the scrollbar can go to a next element (!atEnd).
+  bool get canForward => !atEnd;
+
+  /// canBackward indicate if the scrollbar can go to a previous element (!atStart).
+  bool get canBackward => !atStart;
 
   /// scrollTop will move the scrollbar to the top (first item).
   void scrollToStart({bool? animate}) {

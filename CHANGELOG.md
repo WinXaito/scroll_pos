@@ -1,3 +1,8 @@
+## [next]
+
+- **BREAKING CHANGE**: Fix `canBackward` and `canForward` methods. These methods had a bad behaviour.
+- Add `atStart` and `atEnd` attribute to indicate if the scrollbar is at the top or the bottom.
+
 ## 0.4.0 - 08/05/2023
 
 - Add more checks to avoid error or division by zero ([#1](https://github.com/WinXaito/scroll_pos/pull/1))

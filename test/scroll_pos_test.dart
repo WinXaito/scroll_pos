@@ -136,4 +136,38 @@ void main() {
     controller.backward();
     expect(controller.offset, 0);
   });
+
+  test('Is At Start', (){
+    controller.scrollToStart();
+    expect(controller.atStart, true);
+    controller.scrollToEnd();
+    expect(controller.atStart, false);
+  });
+
+  test('Is At End', (){
+    controller.scrollToStart();
+    expect(controller.atEnd, false);
+    controller.scrollToEnd();
+    expect(controller.atEnd, true);
+  });
+
+  test('Can Forward', () {
+    controller.scrollToStart();
+    expect(controller.canForward, true);
+    controller.scrollToEnd();
+    expect(controller.canForward, false);
+    controller.backward();
+    expect(controller.canForward, true);
+  });
+
+  test('Can Backward', () {
+    controller.scrollToStart();
+    expect(controller.canBackward, false);
+    controller.scrollToEnd();
+    expect(controller.canBackward, true);
+    controller.scrollToStart();
+    expect(controller.canBackward, false);
+    controller.forward();
+    expect(controller.canBackward, true);
+  });
 }

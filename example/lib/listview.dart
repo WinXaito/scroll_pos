@@ -14,6 +14,21 @@ class _ExampleListViewState extends State<ExampleListView> {
   int selected = 0;
   bool center = false;
 
+  void rebuild() => setState((){});
+
+  @override
+  void initState() {
+    controller.addListener(rebuild);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.removeListener(rebuild);
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -92,10 +107,10 @@ class _ExampleListViewState extends State<ExampleListView> {
       }),
       _bt('Forward', () {
         controller.forward();
-      }),
+      }, enabled: controller.canForward),
       _bt('Backward', () {
         controller.backward();
-      }),
+      }, enabled: controller.canBackward),
       Row(
         children: [
           const Text('Animation:'),
@@ -125,14 +140,14 @@ class _ExampleListViewState extends State<ExampleListView> {
     ];
   }
 
-  Widget _bt(String text, VoidCallback onPressed) {
+  Widget _bt(String text, VoidCallback onPressed, {bool enabled = true}) {
     return TextButton(
       child: Text(text),
-      onPressed: () {
+      onPressed: enabled ? () {
         setState(() {
           onPressed();
         });
-      },
+      } : null,
     );
   }
 }
